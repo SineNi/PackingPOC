@@ -1,10 +1,10 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel"
-], function(JSONModel) {
+], function (JSONModel) {
 	"use strict";
 
 	return new JSONModel({
-		"busy": true,
+		"busy": false,
 		"sourceId": "",
 		"sourceType": "",
 		"currentShipHandlingUnit": "",
@@ -15,7 +15,7 @@ sap.ui.define([
 		"closeShipHUEnable": false,
 		"sourceMaterialId": "",
 		"isOnCloud": true,
-		"scaleEnabled":false,
+		"scaleEnabled": false,
 		"bin": "",
 		"unpackEnable": false,
 		"productId": "",
@@ -23,6 +23,8 @@ sap.ui.define([
 		"pendingTaskNumber": 0,
 		//tell if a source handling unit/bin or ship handling unit is displaying in the source side
 		"isPickHUInSourceSide": true,
-		"exceptionList":[]
+		"exceptionList": [],
+		"imageVisible": false,
+		"currentShipMaterial": ""
 	});
 });

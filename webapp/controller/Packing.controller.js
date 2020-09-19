@@ -1,5 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"scm/ewm/PackingPOC/model/Global",
 	"scm/ewm/PackingPOC/modelHelper/Global",
 	"scm/ewm/PackingPOC/service/Service",
 	"scm/ewm/PackingPOC/utils/Util",
@@ -9,40 +10,91 @@ sap.ui.define([
 	"sap/ui/vk/ContentConnector",
 	"sap/ui/vk/thirdparty/three",
 	"sap/ui/core/ValueState"
-], function (Controller, Global, Service, Util, TableItemsHelper, JSONModel, ContentResource, ContentConnector, threejs, ValueState) {
+], function (Controller, GlobalModel, Global, Service, Util, TableItemsHelper, JSONModel, ContentResource, ContentConnector, threejs,
+	ValueState) {
 	"use strict";
 	return Controller.extend("scm.ewm.PackingPOC.controller.Packing", {
 		oItemHelper: new TableItemsHelper(new JSONModel([])),
 		oProduct: {},
+		root: new THREE.Group(),
 		onInit: function () {
-			Service.getRuntimeEnvironment();
+			this.getView().setModel(GlobalModel, "global");
+			this.getView().setModel(this.oItemHelper.getModel(), "itemModel");
+			// Service.getRuntimeEnvironment();
 			Global.setWarehouseNumber("EW01");
 			Global.setPackStation("WP02");
+			Global.setBin("PACK-O01");
 			// Service.verifyWorkCenter("WP02");
+			this.initThreejsModel();
 		},
 		onSourceInputChange: function (oEvent) {
 			var oInput = oEvent.getSource();
 			var sInput = Util.trim(oEvent.getParameter("newValue")).toUpperCase();
 			Global.setSourceId(sInput);
+			Global.setBusy(true);
 			Service.verifySource(sInput)
 				.then(function (mResponse) {
 					Global.setSourceId(mResponse.SourceId);
 					Global.setSourceType(mResponse.SourceType);
 					Global.setSourceMaterialId(mResponse.PackMat);
 					Global.setIsPickHUInSourceSide(mResponse.IsPickHU);
-				})
+					// this.createShippingHU("CARTON_L", 25, 25, 25);
+					// this.createShippingHU(sMaterialId, ilength, iWidth, iHeight);
+				}.bind(this))
 				.then(function () {
 					return Service.getHUItems(Global.getSourceId());
 				})
 				.then(function (aItem) {
+					this.addSequence(aItem);
 					this.oItemHelper.setItems(aItem);
-					this.initThreejsModel();
+					this.initProductImage();
+					Global.setBusy(false);
+				}.bind(this))
+				.then(function () {
+					oInput.setValueState(ValueState.None);
+					this.byId("product-input").focus();
 				}.bind(this))
 				.catch(function () {
 					oInput.setValue("");
 					oInput.setValueState(ValueState.Error);
 					oInput.focus();
+					Global.setBusy(false);
 				});
+		},
+		generateRandomArray: function (aArray) {
+			var aNumber = aArray.slice();
+			var iLength = aNumber.length;
+			var temp, iRandomIndex;
+			while (iLength != 0) {
+				iRandomIndex = Math.round(0 + (iLength - 1 - 0) * Math.random());
+				temp = aNumber[iRandomIndex];
+				aNumber[iRandomIndex] = aNumber[iLength - 1];
+				aNumber[iLength - 1] = temp;
+				iLength--;
+			}
+			return aNumber;
+		},
+
+		addSequence: function (aItem) {
+			var aRandomArray = this.generateRandomArray([1, 2, 3, 4]);
+			for (var i = 0; i < aItem.length; i++) {
+				aItem[i].sequence = aRandomArray[i];
+				aItem[i].visible = true;
+			}
+			return aItem;
+		},
+		initProductImage: function () {
+			Global.setImageVisible(true);
+			var iIndex = this.oItemHelper.getItemIndexBySequence(1);
+			this.highlightProductByIndex(iIndex + 1);
+		},
+		highlightProductByIndex: function (iIndex) {
+			var sImageId = "image-" + iIndex;
+			var oImage = this.getView().byId(sImageId);
+			sImageId = oImage.getId();
+			setTimeout(function () {
+				$("#" + sImageId).removeClass("transparentBorder").addClass("border");
+			}, 0);
 		},
 		onProductChange: function (oEvent) {
 			var oInput = oEvent.getSource();
@@ -51,16 +103,20 @@ sap.ui.define([
 			if (sInput === "PACK") {
 				if (!Util.isEmpty(Global.getProductId())) {
 					var fPackQuantity = Util.parseNumber(this.oProduct.AlterQuan);
-					Service.pack(this.oProduct, fPackQuantity)
-						.then(function () {
-							// Add pack product to right side
-						})
-						.catch(function () {
-							oInput.setValue("");
-							oInput.setValueState(ValueState.Error);
-							oInput.setValueStateText("Packing failed");
-							oInput.focus();
-						});
+					Global.setBusy(true);
+					// Service.pack(this.oProduct, fPackQuantity)
+					// 	.then(function () {
+					this.addProduct(0, 0, 0, 10, 15, 10);
+					// this.addProduct(iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight);
+					Global.setBusy(false);
+					// })
+					// .catch(function () {
+					// 	oInput.setValue("");
+					// 	oInput.setValueState(ValueState.Error);
+					// 	oInput.setValueStateText("Packing failed");
+					// 	oInput.focus();
+					// 	Global.setBusy(false);
+					// });
 				} else {
 					oInput.setValue("");
 					oInput.setValueState(ValueState.Error);
@@ -84,108 +140,108 @@ sap.ui.define([
 
 		},
 
+		createShippingHU: function (sMaterialId, ilength, iWidth, iHeight) {
+			var sHuId = "";
+			Service.createShippingHU(sHuId, sMaterialId)
+				.then(function (oResult) {
+					sHuId = oResult.HuId;
+					Global.setCurrentShipHandlingUnit(sHuId);
+					Global.setCurrentShipMaterial("Carton Large");
+					Global.setCurrentShipHandlingUnitClosed(false);
+					this.addHU(ilength, iWidth, iHeight);
+				}.bind(this))
+				.catch(function () {});
+		},
 		onPackProduct: function () {
 
 		},
-		initThreejsModel: function () {
-
-			function threejsObjectLoader(parentNode, contentResource) {
-				parentNode.add(contentResource.getSource());
+		threejsObjectLoader: function (parentNode, contentResource) {
+			parentNode.add(contentResource.getSource());
+			return Promise.resolve({
+				node: parentNode,
+				contentResource: contentResource
+			});
+		},
+		threejsContentManagerResolver: function (contentResource) {
+			var that = this;
+			if (contentResource.getSource() instanceof THREE.Object3D) {
 				return Promise.resolve({
-					node: parentNode,
-					contentResource: contentResource
+					dimension: 3,
+					contentManagerClassName: "sap.ui.vk.threejs.ContentManager",
+					settings: {
+						loader: that.threejsObjectLoader
+					}
 				});
+			} else {
+				return Promise.reject();
 			}
+		},
+		initPosition: function (obj, name, posX, posY, posZ, id) {
+			obj.name = name;
+			obj.position.set(posX, posY, posZ);
+			obj.userData.treeNode = {
+				sid: id
+			};
+		},
+		initThreejsModel: function () {
+			ContentConnector.addContentManagerResolver(this.threejsContentManagerResolver.bind(this));
 
-			function threejsContentManagerResolver(contentResource) {
-				if (contentResource.getSource() instanceof THREE.Object3D) {
-					return Promise.resolve({
-						dimension: 3,
-						contentManagerClassName: "sap.ui.vk.threejs.ContentManager",
-						settings: {
-							loader: threejsObjectLoader
-						}
-					});
-				} else {
-					return Promise.reject();
-				}
-			}
+			this.initPosition(this.root, "Root", 0, 0, 0, "0");
+			this.root.rotateY(45);
+			// var obj;
+			// obj = new THREE.Mesh(
+			// 	new THREE.BoxBufferGeometry(25, 25, 25),
+			// 	new THREE.MeshPhongMaterial({
+			// 		color: 0x0000C0,
+			// 		shading: THREE.FlatShading
+			// 	})
+			// );
+			// this.initPosition(obj, "Box", 0, 0, 0, "1");
+			// this.root.add(obj);
 
-			ContentConnector.addContentManagerResolver(threejsContentManagerResolver);
-
-			function initObject(obj, name, posX, posY, posZ, id) {
-				obj.name = name;
-				obj.position.set(posX, posY, posZ);
-				obj.userData.treeNode = {
-					sid: id
-				};
-			}
-
-			var dx = 20,
-				dy = 10;
-			var root = new THREE.Group();
-			initObject(root, "Root", 0, 0, 0, "0");
-
+			this.getView().byId("viewer").addContentResource(
+				new ContentResource({
+					source: this.root,
+					sourceType: "THREE.Object3D",
+					name: "Object3D"
+				})
+			);
+		},
+		addHU: function (ilength, iWidth, iHeight) {
 			var obj = new THREE.Mesh(
-				new THREE.TorusBufferGeometry(5, 2, 16, 100),
+				new THREE.BoxBufferGeometry(ilength, iWidth, iHeight),
 				new THREE.MeshPhongMaterial({
-					color: 0xC06000
+					color: 0x3EABFF,
+					shading: THREE.FlatShading
 				})
 			);
-			initObject(obj, "Torus1", -dx, dy, 0, "1");
-			root.add(obj);
-
-			obj = new THREE.Mesh(
-				new THREE.TorusKnotBufferGeometry(4, 1, 256, 24),
-				new THREE.MeshPhongMaterial({
-					color: 0x00C0C0
+			this.initPosition(obj, "Box", 0, 0, 0, "1");
+			this.root.add(obj);
+			this.getView().byId("viewer").addContentResource(
+				new ContentResource({
+					source: this.root,
+					sourceType: "THREE.Object3D",
+					name: "Object3D"
 				})
 			);
-			initObject(obj, "TorusKnot", 0, dy, 0, "2");
-			root.add(obj);
-
-			obj = new THREE.Mesh(
-				new THREE.CylinderBufferGeometry(5, 5, 10, 48),
-				new THREE.MeshPhongMaterial({
-					color: 0xC00000
-				})
-			);
-			initObject(obj, "Cylinder", dx, dy, 0, "3");
-			root.add(obj);
-
-			obj = new THREE.Mesh(
+		},
+		initProduct: function (iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor) {
+			var obj = new THREE.Mesh(
 				new THREE.BoxBufferGeometry(10, 10, 10),
 				new THREE.MeshPhongMaterial({
 					color: 0x0000C0,
 					shading: THREE.FlatShading
 				})
 			);
-			initObject(obj, "Box", -dx, -dy, 0, "4");
-			root.add(obj);
-
-			obj = new THREE.Mesh(
-				new THREE.ConeBufferGeometry(5, 10, 16),
-				new THREE.MeshPhongMaterial({
-					color: 0x00C000,
-					shading: THREE.FlatShading
-				})
-			);
-			initObject(obj, "Cone", 0, -dy, 0, "5");
-			root.add(obj);
-
-			obj = new THREE.Mesh(
-				new THREE.DodecahedronBufferGeometry(6, 0),
-				new THREE.MeshPhongMaterial({
-					color: 0xC0C000,
-					shading: THREE.FlatShading
-				})
-			);
-			initObject(obj, "Dodecahedron", dx, -dy, 0, "6");
-			root.add(obj);
-
+			this.initPosition(obj, "Box", iPositionX, iPositionY, iPositionZ);
+			return obj;
+		},
+		addProduct: function () {
+			var obj = this.initProduct();
+			this.root.add(obj);
 			this.getView().byId("viewer").addContentResource(
 				new ContentResource({
-					source: root,
+					source: this.root,
 					sourceType: "THREE.Object3D",
 					name: "Object3D"
 				})

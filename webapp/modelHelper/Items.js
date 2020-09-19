@@ -12,6 +12,16 @@ sap.ui.define([
 
 	jQuery.extend(Items.prototype, Error.prototype, {
 		constructor: Items,
+		getItemIndexBySequence: function (iSequence) {
+			var aProducts = this._oModel.getData();
+			var iIndex = Util.findIndex(aProducts, function (oProduct, index) {
+				if (oProduct.sequence === iSequence) {
+					return true;
+				}
+				return false;
+			});
+			return iIndex;
+		},
 		getModel: function () {
 			return this._oModel;
 		},
@@ -358,7 +368,7 @@ sap.ui.define([
 			if (Util.isEmpty(sConsGroup)) {
 				this.setItemsStatusToNone();
 				// if (!PackingMode.isInternalMode() || !Util.isEmpty(Global.getProductId()) && Util.isEmpty(Global.getCurrentShipHandlingUnit())) {
-					aProducts[0].Status = sap.ui.core.MessageType.Information;
+				aProducts[0].Status = sap.ui.core.MessageType.Information;
 				// }
 			} else {
 				aProducts.map(function (item, index) {

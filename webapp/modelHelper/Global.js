@@ -5,6 +5,20 @@ sap.ui.define([
 ], function (Model, Util, Const) {
 	"use strict";
 	return {
+		setImageVisible: function (bVisible) {
+			Model.setProperty("/imageVisible", bVisible);
+			return this;
+		},
+		getImageVisible: function () {
+			return Model.getProperty("/imageVisible");
+		},
+		setCurrentShipMaterial: function (sMaterial) {
+			Model.setProperty("/currentShipMaterial", sMaterial);
+			return this;
+		},
+		getCurrentShipMaterial: function () {
+			return Model.getProperty("/currentShipMaterial");
+		},
 		getExceptionList: function () {
 			return Model.getProperty("/exceptionList");
 		},

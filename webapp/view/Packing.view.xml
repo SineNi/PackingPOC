@@ -3,7 +3,7 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
+				<Page id="page" title="{i18n>title}" busy="{global>/busy}">
 					<content>
 						<l:Grid>
 							<l:Grid>
@@ -24,7 +24,7 @@
 												<Label text="{i18n>referenceNumber}"></Label>
 											</f:label>
 											<f:fields>
-												<Input change="onSourceInputChange">
+												<Input id="source-input" change="onSourceInputChange">
 													<layoutData>
 														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
 													</layoutData>
@@ -36,7 +36,7 @@
 												<Label text="{i18n>productAndAccessCode}"></Label>
 											</f:label>
 											<f:fields>
-												<Input change="onProductChange">
+												<Input id="product-input" change="onProductChange">
 													<layoutData>
 														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
 													</layoutData>
@@ -45,6 +45,46 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
+								<l:Grid>
+									<l:layoutData>
+										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+									</l:layoutData>
+									<VBox alignItems="Center">
+										<Image id="image-1" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+									</VBox>
+								</l:Grid>
+								<l:Grid>
+									<l:layoutData>
+										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+									</l:layoutData>
+									<VBox alignItems="Center">
+										<Image id="image-2" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+									</VBox>
+								</l:Grid>
+								<l:Grid>
+									<l:layoutData>
+										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+									</l:layoutData>
+									<VBox alignItems="Center">
+										<Image id="image-3" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+									</VBox>
+								</l:Grid>
+								<l:Grid>
+									<l:layoutData>
+										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+									</l:layoutData>
+									<VBox alignItems="Center">
+										<Image id="image-4" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+									</VBox>
+								</l:Grid>
 							</l:Grid>
 							<l:Grid>
 								<l:layoutData>
@@ -64,7 +104,7 @@
 												<Label text="{i18n>packHandlingUnit}"></Label>
 											</f:label>
 											<f:fields>
-												<Text id="pack-hu-id-text" text="">
+												<Text id="pack-hu-id-text" text="{global>/currentShipHandlingUnit}">
 													<layoutData>
 														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
 													</layoutData>
@@ -76,7 +116,7 @@
 												<Label text="{i18n>packagingMaterial}"></Label>
 											</f:label>
 											<f:fields>
-												<Text id="packaging-material-text" text="">
+												<Text id="packaging-material-text" text="{global>/currentShipMaterial}">
 													<layoutData>
 														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
 													</layoutData>
@@ -85,11 +125,12 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<vk:Viewer id="viewer" enableSceneTree="false">
+								<vk:Viewer id="viewer" enableSceneTree="false" height="500px">
 									<vk:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</vk:layoutData>
 								</vk:Viewer>
+								<Button text="Pack" press="addProduct"></Button>
 							</l:Grid>
 						</l:Grid>
 					</content>
