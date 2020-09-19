@@ -5,12 +5,19 @@ sap.ui.define([
 ], function (Model, Util, Const) {
 	"use strict";
 	return {
-		setImageVisible: function (bVisible) {
-			Model.setProperty("/imageVisible", bVisible);
+		setCurrentSequence: function (iSequence) {
+			Model.setProperty("/currentSequence", iSequence);
 			return this;
 		},
-		getImageVisible: function () {
-			return Model.getProperty("/imageVisible");
+		getCurrentSequence: function () {
+			return Model.getProperty("/currentSequence");
+		},
+		setMaxSequence: function (iSequence) {
+		Model.setProperty("/maxSequence", iSequence);
+			return this;	
+		},
+		getMaxSequence: function () {
+				return Model.getProperty("/maxSequence");
 		},
 		setCurrentShipMaterial: function (sMaterial) {
 			Model.setProperty("/currentShipMaterial", sMaterial);

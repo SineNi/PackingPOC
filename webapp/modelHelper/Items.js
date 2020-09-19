@@ -22,6 +22,19 @@ sap.ui.define([
 			});
 			return iIndex;
 		},
+		setVisibleBySequence: function (iSequence, bVisible) {
+			var aProduct = this.getAllItems();
+			var oResult = Util.find(aProduct, function (oProduct) {
+				if (oProduct.sequence === iSequence) {
+					return true;
+				}
+				return false;
+			});
+			if (oResult) {
+				oResult.visible = bVisible;
+			}
+			this._oModel.updateBindings(true);
+		},
 		getModel: function () {
 			return this._oModel;
 		},

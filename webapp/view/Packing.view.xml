@@ -50,9 +50,10 @@
 										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-1" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+										<Image id="image-1" visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+											visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid>
@@ -60,9 +61,10 @@
 										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-2" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+										<Image id="image-2" visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+											visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid>
@@ -70,9 +72,10 @@
 										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-3" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+										<Image id="image-3" visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+											visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid>
@@ -80,9 +83,10 @@
 										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-4" visible="{global>/imageVisible}" width="260px" class="transparentBorder"
+										<Image id="image-4" visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="260px"></Title>
+										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+											visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
 							</l:Grid>

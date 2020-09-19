@@ -24,7 +24,8 @@ sap.ui.define([
 		//tell if a source handling unit/bin or ship handling unit is displaying in the source side
 		"isPickHUInSourceSide": true,
 		"exceptionList": [],
-		"imageVisible": false,
+		"currentSequence": 1,
+		"maxSequence": 1,
 		"currentShipMaterial": ""
 	});
 });

@@ -38,16 +38,202 @@ sap.ui.define([
 					Global.setSourceType(mResponse.SourceType);
 					Global.setSourceMaterialId(mResponse.PackMat);
 					Global.setIsPickHUInSourceSide(mResponse.IsPickHU);
-					// this.createShippingHU("CARTON_L", 25, 25, 25);
+					this.createShippingHU("CARTON_L", 25, 25, 25);
 					// this.createShippingHU(sMaterialId, ilength, iWidth, iHeight);
 				}.bind(this))
 				.then(function () {
-					return Service.getHUItems(Global.getSourceId());
+					return [{
+						"__metadata": {
+							"id": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'0894ef45-7741-1eda-bec6-efbf1b00c69e')",
+							"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'0894ef45-7741-1eda-bec6-efbf1b00c69e')",
+							"type": "pack_outbdlv_srv.Item"
+						},
+						"ParentId": "40f2e9af-c501-1eea-9e8f-aabcf1cf5304",
+						"StockId": "0894ef45-7741-1eda-bec6-efbf1b00c69e",
+						"DocId": "3863bb44-f021-1ed7-8689-67735892fb07",
+						"ItmId": "3863bb44-f021-1ed7-8689-e7f3bbacde5e",
+						"ConsGrp": "0005000387",
+						"BaseUnit": "EA",
+						"AlterUnit": "EA",
+						"Quan": "1",
+						"AlterQuan": "1",
+						"DocNo": "310000042209",
+						"HuId": "800100761",
+						"Batch": "0000142770",
+						"SnReq": "",
+						"SnList": "",
+						"IuidList": "",
+						"Product": "PROD-S01",
+						"ProductDesc": "Batch Managed Material EWM Team 3",
+						"ProductWeight": "0.000",
+						"ProductUoM": "",
+						"Type": "1",
+						"Workstation": "WP02",
+						"HandlingInstr": "",
+						"EAN": "",
+						"PrdtPicURL": "",
+						"Lgnum": "EW01",
+						"Bin": "PACK-O01",
+						"QtyReduced": "0",
+						"isSplit": "X",
+						"isIuidActive": "",
+						"StockType": "F2",
+						"StockTypeText": "Unrestricted-Use Warehouse",
+						"Weight": "0.100",
+						"WeightUoM": "KG",
+						"Volume": "1.500",
+						"VolumeUoM": "CD3",
+						"ItemsSerialNumber": {
+							"__deferred": {
+								"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'0894ef45-7741-1eda-bec6-efbf1b00c69e')/ItemsSerialNumber"
+							}
+						}
+					}, {
+						"__metadata": {
+							"id": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'40f2e9af-be79-1ed7-bcba-a256f42b6da2')",
+							"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'40f2e9af-be79-1ed7-bcba-a256f42b6da2')",
+							"type": "pack_outbdlv_srv.Item"
+						},
+						"ParentId": "40f2e9af-c501-1eea-9e8f-aabcf1cf5304",
+						"StockId": "40f2e9af-be79-1ed7-bcba-a256f42b6da2",
+						"DocId": "3863bb44-f021-1ed7-8689-67735892fb07",
+						"ItmId": "3863bb44-f021-1ed7-8689-e7f3bbacde5e",
+						"ConsGrp": "0005000387",
+						"BaseUnit": "EA",
+						"AlterUnit": "EA",
+						"Quan": "2",
+						"AlterQuan": "2",
+						"DocNo": "310000042209",
+						"HuId": "800100761",
+						"Batch": "0000142770",
+						"SnReq": "",
+						"SnList": "",
+						"IuidList": "",
+						"Product": "PROD-S02",
+						"ProductDesc": "Batch Managed Material EWM Team 3",
+						"ProductWeight": "0.000",
+						"ProductUoM": "",
+						"Type": "1",
+						"Workstation": "WP02",
+						"HandlingInstr": "",
+						"EAN": "",
+						"PrdtPicURL": "",
+						"Lgnum": "EW01",
+						"Bin": "PACK-O01",
+						"QtyReduced": "0",
+						"isSplit": "X",
+						"isIuidActive": "",
+						"StockType": "F2",
+						"StockTypeText": "Unrestricted-Use Warehouse",
+						"Weight": "0.200",
+						"WeightUoM": "KG",
+						"Volume": "3.000",
+						"VolumeUoM": "CD3",
+						"ItemsSerialNumber": {
+							"__deferred": {
+								"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'40f2e9af-be79-1ed7-bcba-a256f42b6da2')/ItemsSerialNumber"
+							}
+						}
+					}, {
+						"__metadata": {
+							"id": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb2be5e')",
+							"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb2be5e')",
+							"type": "pack_outbdlv_srv.Item"
+						},
+						"ParentId": "40f2e9af-c501-1eea-9e8f-aabcf1cf5304",
+						"StockId": "3863bb44-f021-1ed7-8689-e7f3bbb2be5e",
+						"DocId": "3863bb44-f021-1ed7-8689-67735892fb07",
+						"ItmId": "3863bb44-f021-1ed7-8689-e7f3bbacde5e",
+						"ConsGrp": "0005000387",
+						"BaseUnit": "EA",
+						"AlterUnit": "EA",
+						"Quan": "2",
+						"AlterQuan": "2",
+						"DocNo": "310000042209",
+						"HuId": "800100761",
+						"Batch": "0000142770",
+						"SnReq": "",
+						"SnList": "",
+						"IuidList": "",
+						"Product": "PROD-S03",
+						"ProductDesc": "Batch Managed Material EWM Team 3",
+						"ProductWeight": "0.000",
+						"ProductUoM": "",
+						"Type": "1",
+						"Workstation": "WP02",
+						"HandlingInstr": "",
+						"EAN": "",
+						"PrdtPicURL": "",
+						"Lgnum": "EW01",
+						"Bin": "PACK-O01",
+						"QtyReduced": "0",
+						"isSplit": "X",
+						"isIuidActive": "",
+						"StockType": "F2",
+						"StockTypeText": "Unrestricted-Use Warehouse",
+						"Weight": "0.200",
+						"WeightUoM": "KG",
+						"Volume": "3.000",
+						"VolumeUoM": "CD3",
+						"ItemsSerialNumber": {
+							"__deferred": {
+								"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb2be5e')/ItemsSerialNumber"
+							}
+						}
+					}, {
+						"__metadata": {
+							"id": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb25e5e')",
+							"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb25e5e')",
+							"type": "pack_outbdlv_srv.Item"
+						},
+						"ParentId": "40f2e9af-c501-1eea-9e8f-aabcf1cf5304",
+						"StockId": "3863bb44-f021-1ed7-8689-e7f3bbb25e5e",
+						"DocId": "3863bb44-f021-1ed7-8689-67735892fb07",
+						"ItmId": "3863bb44-f021-1ed7-8689-e7f3bbacde5e",
+						"ConsGrp": "0005000387",
+						"BaseUnit": "EA",
+						"AlterUnit": "EA",
+						"Quan": "1",
+						"AlterQuan": "1",
+						"DocNo": "310000042209",
+						"HuId": "800100761",
+						"Batch": "0000142770",
+						"SnReq": "",
+						"SnList": "",
+						"IuidList": "",
+						"Product": "PROD-S04",
+						"ProductDesc": "Batch Managed Material EWM Team 3",
+						"ProductWeight": "0.000",
+						"ProductUoM": "",
+						"Type": "1",
+						"Workstation": "WP02",
+						"HandlingInstr": "",
+						"EAN": "",
+						"PrdtPicURL": "",
+						"Lgnum": "EW01",
+						"Bin": "PACK-O01",
+						"QtyReduced": "0",
+						"isSplit": "X",
+						"isIuidActive": "",
+						"StockType": "F2",
+						"StockTypeText": "Unrestricted-Use Warehouse",
+						"Weight": "0.100",
+						"WeightUoM": "KG",
+						"Volume": "1.500",
+						"VolumeUoM": "CD3",
+						"ItemsSerialNumber": {
+							"__deferred": {
+								"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'3863bb44-f021-1ed7-8689-e7f3bbb25e5e')/ItemsSerialNumber"
+							}
+						}
+					}];
+					// return Service.getHUItems(Global.getSourceId());
 				})
 				.then(function (aItem) {
 					this.addSequence(aItem);
+					Global.setMaxSequence(aItem.length);
 					this.oItemHelper.setItems(aItem);
-					this.initProductImage();
+					this.highlightProductBySequence(1);
 					Global.setBusy(false);
 				}.bind(this))
 				.then(function () {
@@ -83,12 +269,15 @@ sap.ui.define([
 			}
 			return aItem;
 		},
-		initProductImage: function () {
-			Global.setImageVisible(true);
-			var iIndex = this.oItemHelper.getItemIndexBySequence(1);
-			this.highlightProductByIndex(iIndex + 1);
+		formatImageVisible: function (oItem) {
+			if (Util.isEmpty(oItem)) {
+				return false;
+			} else {
+				return oItem.visible;
+			}
 		},
-		highlightProductByIndex: function (iIndex) {
+		highlightProductBySequence: function (iSequence) {
+			var iIndex = this.oItemHelper.getItemIndexBySequence(iSequence) + 1;
 			var sImageId = "image-" + iIndex;
 			var oImage = this.getView().byId(sImageId);
 			sImageId = oImage.getId();
@@ -96,48 +285,36 @@ sap.ui.define([
 				$("#" + sImageId).removeClass("transparentBorder").addClass("border");
 			}, 0);
 		},
+		removeProductBySequence: function (iSequence) {
+			this.oItemHelper.setVisibleBySequence(iSequence, false);
+			var iIndex = this.oItemHelper.getItemIndexBySequence(iSequence) + 1;
+			var sImageId = "image-" + iIndex;
+			var oImage = this.getView().byId(sImageId);
+			sImageId = oImage.getId();
+			$("#" + sImageId).removeClass("border").addClass("transparentBorder");
+
+		},
 		onProductChange: function (oEvent) {
 			var oInput = oEvent.getSource();
-			var sInput = Util.trim(oEvent.getParameter("newValue")).toUpperCase();
-			//fake access code PACK
-			if (sInput === "PACK") {
-				if (!Util.isEmpty(Global.getProductId())) {
-					var fPackQuantity = Util.parseNumber(this.oProduct.AlterQuan);
-					Global.setBusy(true);
-					// Service.pack(this.oProduct, fPackQuantity)
-					// 	.then(function () {
-					this.addProduct(0, 0, 0, 10, 15, 10);
-					// this.addProduct(iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight);
-					Global.setBusy(false);
-					// })
-					// .catch(function () {
-					// 	oInput.setValue("");
-					// 	oInput.setValueState(ValueState.Error);
-					// 	oInput.setValueStateText("Packing failed");
-					// 	oInput.focus();
-					// 	Global.setBusy(false);
-					// });
-				} else {
-					oInput.setValue("");
-					oInput.setValueState(ValueState.Error);
-					oInput.setValueStateText("Please scan product first");
-					oInput.focus();
-				}
-			} else {
-				var iIndex = this.oItemHelper.getItemIndexByProduct(sInput);
-				if (iIndex !== -1) {
-					this.oProduct = this.oItemHelper.getItemByIndex(iIndex);
-				} else {
-					oInput.setValue("");
-					oInput.setValueState(ValueState.Error);
-					oInput.focus();
-				}
-			}
-			//move the selected product to the top of the item model
+			this.updateSourceAfterPacking();
+			oInput.setValue("");
+			oInput.focus();
 
 			//highlight selected product
 			//indicate the position on 3d viewer
+		},
 
+		updateSourceAfterPacking: function () {
+			var iSequence = Global.getCurrentSequence();
+			this.removeProductBySequence(iSequence);
+			if (iSequence < Global.getMaxSequence()) {
+				Global.setCurrentSequence(iSequence + 1);
+				this.highlightProductBySequence(iSequence + 1);
+			} else {
+				var oSourceInput = this.getView().byId("source-input");
+				oSourceInput.setValue("");
+				oSourceInput.focus();
+			}
 		},
 
 		createShippingHU: function (sMaterialId, ilength, iWidth, iHeight) {
@@ -237,7 +414,15 @@ sap.ui.define([
 			return obj;
 		},
 		addProduct: function () {
-			var obj = this.initProduct();
+			var obj = new THREE.Mesh(
+				new THREE.BoxBufferGeometry(10, 10, 10),
+				new THREE.MeshPhongMaterial({
+					color: 0x0000C0,
+					shading: THREE.FlatShading
+				})
+			);
+			this.initPosition(obj, "Box", 10, 20, 0, "2");
+			// var obj = this.initProduct();
 			this.root.add(obj);
 			this.getView().byId("viewer").addContentResource(
 				new ContentResource({
