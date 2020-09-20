@@ -364,7 +364,11 @@ sap.ui.define([
 			ContentConnector.addContentManagerResolver(this.threejsContentManagerResolver.bind(this));
 
 			this.initPosition(this.root, "Root", 0, 0, 0, "0");
-			this.root.rotateY(45);
+			var camera;
+			camera = new THREE.PerspectiveCamera( 40, 579 / 452, 1, 1000 );
+			camera.position.set( 15, 20, 30 );
+			this.root.add( camera );
+			// this.root.rotateY(45);
 			// var obj;
 			// obj = new THREE.Mesh(
 			// 	new THREE.BoxBufferGeometry(25, 25, 25),
@@ -375,7 +379,34 @@ sap.ui.define([
 			// );
 			// this.initPosition(obj, "Box", 0, 0, 0, "1");
 			// this.root.add(obj);
+			var axes = new THREE.AxesHelper( 20 );
+			// axes.position.x = -5
+			// axes.position.y = -5
+			// axes.position.z = -5
+			// scene.add( axes );
+			this.initPosition(axes, "axe", -5,-5,-5, "1")
+			this.root.add(axes)
 
+			var meshMaterial = new THREE.MeshLambertMaterial( {
+				color: 0xffffff,
+				opacity: 0.5,
+				transparent: true
+			} );
+
+			var meshGeometry = new THREE.BoxBufferGeometry( 10, 10, 10 );
+
+			var mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+			mesh.material.side = THREE.BackSide; // back faces
+			mesh.renderOrder = 0;
+			this.initPosition(mesh, "BigBox", 0, 0, 0, "2")
+			this.root.add( mesh );
+
+			var mesh_ = new THREE.Mesh( meshGeometry, meshMaterial.clone() );
+			mesh_.material.side = THREE.FrontSide; // front faces
+			mesh_.renderOrder = 1;
+			this.initPosition(mesh_, "BigBox_", 0, 0, 0, "3");
+			this.root.add( mesh_ );
+			
 			this.getView().byId("viewer").addContentResource(
 				new ContentResource({
 					source: this.root,
@@ -385,15 +416,27 @@ sap.ui.define([
 			);
 		},
 		addHU: function (ilength, iWidth, iHeight) {
-			var obj = new THREE.Mesh(
-				new THREE.BoxBufferGeometry(ilength, iWidth, iHeight),
-				new THREE.MeshPhongMaterial({
-					color: 0x3EABFF,
-					shading: THREE.FlatShading
-				})
-			);
-			this.initPosition(obj, "Box", 0, 0, 0, "1");
-			this.root.add(obj);
+			var meshMaterial = new THREE.MeshLambertMaterial( {
+				color: 0x0000C0,
+				opacity: 0.3,
+				transparent: true
+			} );
+
+			var meshGeometry = new THREE.BoxBufferGeometry( 10, 10, 10 );
+
+			var mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+			mesh.material.side = THREE.BackSide; // back faces
+			mesh.renderOrder = 0;
+			this.initPosition(mesh, "BigBox", 0, 0, 0, "2")
+			this.root.add( mesh );
+
+			var mesh_ = new THREE.Mesh( meshGeometry, meshMaterial.clone() );
+			mesh_.material.side = THREE.FrontSide; // front faces
+			mesh_.renderOrder = 1;
+			this.initPosition(mesh_, "BigBox_", 0, 0, 0, "3");
+			this.root.add( mesh_ );
+
+			// this.root.add(obj);
 			this.getView().byId("viewer").addContentResource(
 				new ContentResource({
 					source: this.root,
