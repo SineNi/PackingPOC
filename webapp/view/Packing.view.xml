@@ -129,7 +129,7 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<vk:Viewer id="viewer" enableSceneTree="false" height="500px">
+								<vk:Viewer id="viewer" enableSceneTree="false" height="500px" enableToolbar="false">
 									<vk:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</vk:layoutData>

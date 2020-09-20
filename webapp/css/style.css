@@ -23,12 +23,12 @@
 }
 
 .sapUiFormElementLbl {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .textStyle {
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     height: 36px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .sapMInputBaseContentWrapper {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .sapMTitle {
@@ -45,5 +45,5 @@
 }
 
 .sapMBarPH {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.8);
 }
