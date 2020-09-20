@@ -3,14 +3,14 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}" busy="{global>/busy}">
+				<Page id="page" title="{i18n>title}" busy="{global>/busy}" class="backgroundImage">
 					<content>
 						<l:Grid>
 							<l:Grid>
 								<l:layoutData>
 									<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 								</l:layoutData>
-								<f:Form>
+								<f:Form class="sapUiLargeMarginBottom">
 									<f:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</f:layoutData>
@@ -21,71 +21,71 @@
 									<f:FormContainer>
 										<f:FormElement>
 											<f:label>
-												<Label text="{i18n>referenceNumber}"></Label>
+												<Label text="{i18n>referenceNumber}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
 											</f:label>
 											<f:fields>
-												<Input id="source-input" change="onSourceInputChange">
+												<Input id="source-input" change="onSourceInputChange" class="sapUiNoMargin">
 													<layoutData>
-														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
+														<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 													</layoutData>
 												</Input>
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement>
 											<f:label>
-												<Label text="{i18n>productAndAccessCode}"></Label>
+												<Label text="{i18n>productAndAccessCode}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
 											</f:label>
 											<f:fields>
-												<Input id="product-input" change="onProductChange">
+												<Input id="product-input" change="onProductChange" class="sapUiNoMargin inputStyle">
 													<layoutData>
-														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
+														<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 													</layoutData>
 												</Input>
 											</f:fields>
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<l:Grid>
+								<l:Grid defaultIndent="XL1 L1 M1 S1"  position="Center" vSpacing="0">
 									<l:layoutData>
-										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-1" visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
+										<Image id="image-1" visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="240px"
 											visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
-								<l:Grid>
+								<l:Grid defaultIndent="XL1 L1 M1 S1" position="Center" vSpacing="0">
 									<l:layoutData>
-										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-2" visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
+										<Image id="image-2" visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="240px"
 											visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
-								<l:Grid>
+								<l:Grid defaultIndent="XL1 L1 M1 S1">
 									<l:layoutData>
-										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-3" visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
+										<Image id="image-3" visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="240px"
 											visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
-								<l:Grid>
+								<l:Grid defaultIndent="XL1 L1 M1 S1">
 									<l:layoutData>
-										<l:GridData span="XL6 L6 M12 S12"></l:GridData>
+										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-4" visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}" width="260px" class="transparentBorder"
+										<Image id="image-4" visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="260px"
+										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="240px"
 											visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}"></Title>
 									</VBox>
 								</l:Grid>
@@ -105,24 +105,24 @@
 									<f:FormContainer>
 										<f:FormElement>
 											<f:label>
-												<Label text="{i18n>packHandlingUnit}"></Label>
+												<Label text="{i18n>packHandlingUnit}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
 											</f:label>
 											<f:fields>
-												<Text id="pack-hu-id-text" text="{global>/currentShipHandlingUnit}">
+												<Text id="pack-hu-id-text" text="{global>/currentShipHandlingUnit}" class="textStyle">
 													<layoutData>
-														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
+														<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 													</layoutData>
 												</Text>
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement>
 											<f:label>
-												<Label text="{i18n>packagingMaterial}"></Label>
+												<Label text="{i18n>packagingMaterial}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
 											</f:label>
 											<f:fields>
-												<Text id="packaging-material-text" text="{global>/currentShipMaterial}">
+												<Text id="packaging-material-text" text="{global>/currentShipMaterial}" class="textStyle">
 													<layoutData>
-														<l:GridData span="XL4 L4 M4 S4"></l:GridData>
+														<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 													</layoutData>
 												</Text>
 											</f:fields>
@@ -134,7 +134,6 @@
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</vk:layoutData>
 								</vk:Viewer>
-								<Button text="Pack" press="addProduct"></Button>
 							</l:Grid>
 						</l:Grid>
 					</content>

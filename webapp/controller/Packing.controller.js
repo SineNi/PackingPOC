@@ -32,17 +32,17 @@ sap.ui.define([
 			var sInput = Util.trim(oEvent.getParameter("newValue")).toUpperCase();
 			Global.setSourceId(sInput);
 			Global.setBusy(true);
-			Service.verifySource(sInput)
-				.then(function (mResponse) {
-					Global.setSourceId(mResponse.SourceId);
-					Global.setSourceType(mResponse.SourceType);
-					Global.setSourceMaterialId(mResponse.PackMat);
-					Global.setIsPickHUInSourceSide(mResponse.IsPickHU);
-					this.createShippingHU("CARTON_L", 25, 25, 25);
-					// this.createShippingHU(sMaterialId, ilength, iWidth, iHeight);
-				}.bind(this))
-				.then(function () {
-					return [{
+			// Service.verifySource(sInput)
+			// 	.then(function (mResponse) {
+			// 		Global.setSourceId(mResponse.SourceId);
+			// 		Global.setSourceType(mResponse.SourceType);
+			// 		Global.setSourceMaterialId(mResponse.PackMat);
+			// 		Global.setIsPickHUInSourceSide(mResponse.IsPickHU);
+			// 		this.createShippingHU("CARTON_L", 25, 25, 25);
+			// 		// this.createShippingHU(sMaterialId, ilength, iWidth, iHeight);
+			// 	}.bind(this))
+			// 	.then(function () {
+					var aItem= [{
 						"__metadata": {
 							"id": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'0894ef45-7741-1eda-bec6-efbf1b00c69e')",
 							"uri": "https://ldciuyt.wdf.sap.corp:44300/sap/opu/odata/SCWM/PACK_OUTBDLV_SRV/ItemSet(guid'0894ef45-7741-1eda-bec6-efbf1b00c69e')",
@@ -228,24 +228,24 @@ sap.ui.define([
 						}
 					}];
 					// return Service.getHUItems(Global.getSourceId());
-				})
-				.then(function (aItem) {
+				// })
+				// .then(function (aItem) {
 					this.addSequence(aItem);
 					Global.setMaxSequence(aItem.length);
 					this.oItemHelper.setItems(aItem);
 					this.highlightProductBySequence(1);
 					Global.setBusy(false);
-				}.bind(this))
-				.then(function () {
+				// }.bind(this))
+				// .then(function () {
 					oInput.setValueState(ValueState.None);
 					this.byId("product-input").focus();
-				}.bind(this))
-				.catch(function () {
-					oInput.setValue("");
-					oInput.setValueState(ValueState.Error);
-					oInput.focus();
-					Global.setBusy(false);
-				});
+				// }.bind(this))
+				// .catch(function () {
+				// 	oInput.setValue("");
+				// 	oInput.setValueState(ValueState.Error);
+				// 	oInput.focus();
+				// 	Global.setBusy(false);
+				// });
 		},
 		generateRandomArray: function (aArray) {
 			var aNumber = aArray.slice();
