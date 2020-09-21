@@ -26,8 +26,12 @@
 				Global.setBin("PACK-O01");
 				// Service.verifyWorkCenter("WP02");
 				this.initThreejsModel();
+				for (var i = 1; i <= 4; i++) {
+					this.removeTextByIndex(i);
+				}
 			},
 			onSourceInputChange: function (oEvent) {
+				this.clearObject();
 				var oInput = oEvent.getSource();
 				var sInput = Util.trim(oEvent.getParameter("newValue")).toUpperCase();
 				Global.setSourceId(sInput);
@@ -234,6 +238,7 @@
 				Global.setMaxSequence(aItem.length);
 				this.oItemHelper.setItems(aItem);
 				this.highlightProductBySequence(1);
+				this.addProduct(1, 10, 10, 10, -8 + 0, -8, -8, 0xFFFFFF);
 				Global.setBusy(false);
 				// }.bind(this))
 				// .then(function () {
@@ -269,11 +274,11 @@
 				}
 				return aItem;
 			},
-			formatImageVisible: function (oItem) {
+			formatTextVisible: function (oItem, a) {
 				if (Util.isEmpty(oItem)) {
 					return false;
 				} else {
-					return oItem.visible;
+					return true;
 				}
 			},
 			highlightProductBySequence: function (iSequence) {
@@ -288,26 +293,71 @@
 			removeProductBySequence: function (iSequence) {
 				this.oItemHelper.setVisibleBySequence(iSequence, false);
 				var iIndex = this.oItemHelper.getItemIndexBySequence(iSequence) + 1;
+				this.removeImageByIndex(iIndex);
+				// var sImageId = "image-" + iIndex;
+				// var oImage = this.getView().byId(sImageId);
+				// sImageId = oImage.getId();
+				// $("#" + sImageId).removeClass("border").addClass("transparentBorder").addClass("transparentText");
+				this.removeTextByIndex(iIndex);
+			},
+			removeTextByIndex: function (iIndex) {
+				var sTextId = "text-" + iIndex;
+				var oText = this.getView().byId(sTextId);
+				sTextId = oText.getId();
+				$("#" + sTextId).addClass("transparent");
+			},
+			addTextByIndex: function (iIndex) {
+				var sTextId = "text-" + iIndex;
+				var oText = this.getView().byId(sTextId);
+				sTextId = oText.getId();
+				$("#" + sTextId).removeClass("transparent");
+			},
+			addImageByIndex: function (iIndex) {
 				var sImageId = "image-" + iIndex;
 				var oImage = this.getView().byId(sImageId);
 				sImageId = oImage.getId();
-				$("#" + sImageId).removeClass("border").addClass("transparentBorder");
-
+				$("#" + sImageId).removeClass("transparent");
+			},
+			removeImageByIndex: function (iIndex) {
+				var sImageId = "image-" + iIndex;
+				var oImage = this.getView().byId(sImageId);
+				sImageId = oImage.getId();
+				$("#" + sImageId).addClass("transparentBorder").removeClass("border").addClass("transparent");
 			},
 			onProductChange: function (oEvent) {
 				var oInput = oEvent.getSource();
-				this.updateSourceAfterPacking();
 				oInput.setValue("");
 				oInput.focus();
-				
 				var iSequence = Global.getCurrentSequence();
-				if (iSequence < Global.getMaxSequence()){
-					this.addProduct(10, 10, 10, -8+11*(iSequence-2), -8, -8, 0xFFFFFF);
-				} else {
-					this.addProduct(10, 10, 10, -8, -8, -8+11*(iSequence-3), 0xFFFFFF);
+				switch (iSequence) {
+				case 1:
+					this.changeProductColorBySequence(iSequence);
+					this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
+					break;
+				case 2:
+					this.changeProductColorBySequence(iSequence);
+					this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
+					break;
+				case 3:
+					this.changeProductColorBySequence(iSequence);
+					this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence - 2), -8, -8 + 11 * (iSequence - 2), 0xFFFFFF);
+					break;
+				case 4:
+					this.changeProductColorBySequence(iSequence);
+					break;
+				default:
+					break;
 				}
-				
-				
+
+				// if (iSequence < 2) {
+				// 	this.changeProductColorBySequence(iSequence);
+				// 	this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
+				// } else {
+				// 	this.changeProductColorBySequence(iSequence);
+				// 	this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
+				// }
+
+				this.updateSourceAfterPacking();
 
 				//highlight selected product
 				// for ( var i=0; i < iSequence; i++) {
@@ -317,11 +367,13 @@
 				//indicate the position on 3d viewer
 			},
 			readSpec: function (iSequence) {
-				
+
 			},
 			updateSourceAfterPacking: function () {
 				var iSequence = Global.getCurrentSequence();
 				this.removeProductBySequence(iSequence);
+				// this.removeImageByIndex(iSequence);
+				// this.removeTextByIndex(iSequence);
 				if (iSequence < Global.getMaxSequence()) {
 					Global.setCurrentSequence(iSequence + 1);
 					this.highlightProductBySequence(iSequence + 1);
@@ -382,12 +434,12 @@
 				camera = new THREE.PerspectiveCamera(40, 579 / 496, 1, 1000);
 				camera.position.set(15, 20, 30);
 				this.root.add(camera);
-				this.root.add( new THREE.AmbientLight( 0x222222 ) );
+				this.root.add(new THREE.AmbientLight(0x222222));
 
 				// light
 
-				var light = new THREE.PointLight( 0xffffff, 1 );
-				camera.add( light );
+				var light = new THREE.PointLight(0xffffff, 1);
+				camera.add(light);
 				// this.root.rotateY(45);
 				// var obj;
 				// obj = new THREE.Mesh(
@@ -427,13 +479,13 @@
 				var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
 				mesh.material.side = THREE.BackSide; // back faces
 				mesh.renderOrder = 0;
-				this.initPosition(mesh, "BigBox", 0, 0, 0, "2")
+				this.initPosition(mesh, "BigBox+", 0, 0, 0, "2")
 				this.root.add(mesh);
 
 				var mesh_ = new THREE.Mesh(meshGeometry, meshMaterial.clone());
 				mesh_.material.side = THREE.FrontSide; // front faces
 				mesh_.renderOrder = 1;
-				this.initPosition(mesh_, "BigBox_", 0, 0, 0, "3");
+				this.initPosition(mesh_, "BigBox-", 0, 0, 0, "3");
 				this.root.add(mesh_);
 
 				// this.root.add(obj);
@@ -450,19 +502,19 @@
 					new THREE.BoxBufferGeometry(10, 10, 10),
 					new THREE.MeshLambertMaterial({
 						color: 0xFFFFFF
-						// shading: THREE.FlatShading
+							// shading: THREE.FlatShading
 					})
 				);
 				this.initPosition(obj, "Box", iPositionX, iPositionY, iPositionZ);
 				this.root.add(obj)
 				return obj;
 			},
-			addProduct: function (iLength, iWidth, iHeight, iPositionX, iPositionY, iPositionZ, iColor) {
+			addProduct: function (sName, iLength, iWidth, iHeight, iPositionX, iPositionY, iPositionZ, iColor) {
 				var meshMaterial = new THREE.MeshLambertMaterial({
 					// color: iColor,
 					color: 0x3EABFF
-					// opacity: 0.8,
-					// transparent: true
+						// opacity: 0.8,
+						// transparent: true
 				});
 
 				var meshGeometry = new THREE.BoxBufferGeometry(iLength, iWidth, iHeight);
@@ -470,16 +522,75 @@
 				var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
 				mesh.material.side = THREE.BackSide; // back faces
 				mesh.renderOrder = 0;
-				this.initPosition(mesh, "NewBox", iPositionX, iPositionY, iPositionZ, "2")
+				this.initPosition(mesh, sName + "+", iPositionX, iPositionY, iPositionZ, "2")
 				this.root.add(mesh);
 
 				var mesh_ = new THREE.Mesh(meshGeometry, meshMaterial.clone());
 				mesh_.material.side = THREE.FrontSide; // front faces
 				mesh_.renderOrder = 1;
-				this.initPosition(mesh_, "NewBox_", iPositionX, iPositionY, iPositionZ, "3");
+				this.initPosition(mesh_, sName + "-", iPositionX, iPositionY, iPositionZ, "3");
 				this.root.add(mesh_);
 
 				// this.root.add(obj);
+				this.getView().byId("viewer").addContentResource(
+					new ContentResource({
+						source: this.root,
+						sourceType: "THREE.Object3D",
+						name: "Object3D"
+					})
+				);
+			},
+			changeProductColorBySequence: function (iSequence) {
+				var oFront = this.root.getChildByName(iSequence + "+");
+				var oBack = this.root.getChildByName(iSequence + "-");
+				this.root.remove(oFront);
+				this.root.remove(oBack);
+				var meshMaterial = new THREE.MeshLambertMaterial({
+					// color: iColor,
+					color: 0xFFFFFF
+						// opacity: 0.8,
+						// transparent: true
+				});
+				var oGeometry = oFront.geometry.parameters;
+				var oPosition = oFront.position;
+
+				var meshGeometry = new THREE.BoxBufferGeometry(oGeometry.width, oGeometry.height, oGeometry.depth);
+
+				var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
+				mesh.material.side = THREE.BackSide; // back faces
+				mesh.renderOrder = 0;
+				this.initPosition(mesh, iSequence + "+", oPosition.x, oPosition.y, oPosition.z, "2")
+				this.root.add(mesh);
+
+				var mesh_ = new THREE.Mesh(meshGeometry, meshMaterial.clone());
+				mesh_.material.side = THREE.FrontSide; // front faces
+				mesh_.renderOrder = 1;
+				this.initPosition(mesh_, iSequence + "-", oPosition.x, oPosition.y, oPosition.z, "3");
+				this.root.add(mesh_);
+
+				this.getView().byId("viewer").addContentResource(
+					new ContentResource({
+						source: this.root,
+						sourceType: "THREE.Object3D",
+						name: "Object3D"
+					})
+				);
+			},
+			clearObject: function () {
+				Global.setCurrentSequence(1);
+				var oFront, oBack;
+				for (var i = 1; i <= 4; i++) {
+					this.addTextByIndex(i);
+					this.addImageByIndex(i);
+					oFront = this.root.getChildByName(i + "+");
+					oBack = this.root.getChildByName(i + "-");
+					this.root.remove(oFront);
+					this.root.remove(oBack);
+				}
+				oFront = this.root.getChildByName("BigBox+");
+				oBack = this.root.getChildByName("BigBox-");
+				this.root.remove(oFront);
+				this.root.remove(oBack);
 				this.getView().byId("viewer").addContentResource(
 					new ContentResource({
 						source: this.root,

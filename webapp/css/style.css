@@ -14,7 +14,7 @@
 
 .backgroundImage {
     background-image: url(BG.png);
-    background-size: 1280px 800px;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
@@ -46,4 +46,12 @@
 
 .sapMBarPH {
     background-color: rgba(0, 0, 0, 0.9);
+}
+
+.sapMTextMaxWidth {
+    padding: 8px !important;
+}
+
+.transparent {
+    opacity: 0 !important;
 }

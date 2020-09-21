@@ -10,7 +10,7 @@
 								<l:layoutData>
 									<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 								</l:layoutData>
-								<f:Form class="sapUiLargeMarginBottom">
+								<f:Form class="sapUiLargeMarginBottom sapUiMediumMarginTop">
 									<f:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</f:layoutData>
@@ -45,15 +45,14 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<l:Grid defaultIndent="XL1 L1 M1 S1"  position="Center" vSpacing="0">
+								<l:Grid defaultIndent="XL1 L1 M1 S1" position="Center" vSpacing="0">
 									<l:layoutData>
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-1" visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
+										<Image id="image-1" width="240px" height="160px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="240px"
-											visible="{path:'itemModel>/0',formatter:'.formatImageVisible'}"></Title>
+										<Title id="text-1" text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1" position="Center" vSpacing="0">
@@ -61,10 +60,9 @@
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-2" visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
+										<Image id="image-2" width="240px" height="160px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="240px"
-											visible="{path:'itemModel>/1',formatter:'.formatImageVisible'}"></Title>
+										<Title id="text-2" text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1">
@@ -72,10 +70,9 @@
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-3" visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
+										<Image id="image-3" width="240px" height="160px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="240px"
-											visible="{path:'itemModel>/2',formatter:'.formatImageVisible'}"></Title>
+										<Title id="text-3" text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1">
@@ -83,10 +80,9 @@
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
 									<VBox alignItems="Center">
-										<Image id="image-4" visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}" width="240px" class="transparentBorder"
+										<Image id="image-4" width="240px" height="160px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="240px"
-											visible="{path:'itemModel>/3',formatter:'.formatImageVisible'}"></Title>
+										<Title id="text-4" text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
 									</VBox>
 								</l:Grid>
 							</l:Grid>
@@ -94,7 +90,7 @@
 								<l:layoutData>
 									<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 								</l:layoutData>
-								<f:Form>
+								<f:Form class="sapUiLargeMarginBorrom sapUiMediumMarginTop">
 									<f:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</f:layoutData>
@@ -129,7 +125,7 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<vk:Viewer id="viewer" enableSceneTree="false" height="500px">
+								<vk:Viewer id="viewer" enableSceneTree="false" height="500px" class="sapUiMediumMarginTop">
 									<vk:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</vk:layoutData>
