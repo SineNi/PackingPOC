@@ -517,7 +517,7 @@
 				mesh_.renderOrder = 1;
 				this.initPosition(mesh_, "BigBox-", 0, 0, 0, "3");
 				this.root.add(mesh_);
-
+				
 				// this.root.add(obj);
 				this.getView().byId("viewer").addContentResource(
 					new ContentResource({
@@ -598,6 +598,11 @@
 				this.initPosition(mesh_, iSequence + "-", oPosition.x, oPosition.y, oPosition.z, "3");
 				this.root.add(mesh_);
 
+				var edges = new THREE.EdgesGeometry( meshGeometry );
+				var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xff0000} ) );
+				line.position.set(oPosition.x, oPosition.y, oPosition.z)
+				this.root.add( line );
+				
 				this.getView().byId("viewer").addContentResource(
 					new ContentResource({
 						source: this.root,
