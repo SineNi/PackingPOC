@@ -6,11 +6,11 @@
 				<Page id="page" title="{i18n>title}" busy="{global>/busy}" class="backgroundImage">
 					<content>
 						<l:Grid>
-							<l:Grid>
+							<l:Grid class="sapUiMediumMarginTop" vSpacing="0">
 								<l:layoutData>
 									<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 								</l:layoutData>
-								<f:Form class="sapUiLargeMarginBottom sapUiMediumMarginTop">
+								<f:Form class="sapUiLargeMarginTop">
 									<f:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</f:layoutData>
@@ -31,6 +31,17 @@
 												</Input>
 											</f:fields>
 										</f:FormElement>
+									</f:FormContainer>
+								</f:Form>
+								<f:Form class="sapUiLargeMarginBottom sapUiNoPaddingTop">
+									<f:layoutData>
+										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
+									</f:layoutData>
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="4" labelSpanM="4" labelSpanS="5" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0"
+											emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:FormContainer>
 										<f:FormElement>
 											<f:label>
 												<Label text="{i18n>productAndAccessCode}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
@@ -49,48 +60,48 @@
 									<l:layoutData>
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
-									<VBox alignItems="Center">
-										<Image id="image-1" width="240px" height="160px" class="transparent transparentBorder"
+									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd">
+										<Image id="image-1" width="222px" height="190px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title id="text-1" text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
+										<Title id="text-1" text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1" position="Center" vSpacing="0">
 									<l:layoutData>
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
-									<VBox alignItems="Center">
-										<Image id="image-2" width="240px" height="160px" class="transparent transparentBorder"
+									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin">
+										<Image id="image-2" width="225px" height="190px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title id="text-2" text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
+										<Title id="text-2" text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1">
 									<l:layoutData>
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
-									<VBox alignItems="Center">
-										<Image id="image-3" width="240px" height="160px" class="transparent transparentBorder"
+									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd">
+										<Image id="image-3" width="225px" height="190px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title id="text-3" text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
+										<Title id="text-3" text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
 								<l:Grid defaultIndent="XL1 L1 M1 S1">
 									<l:layoutData>
 										<l:GridData span="XL5 L5 M5 S5"></l:GridData>
 									</l:layoutData>
-									<VBox alignItems="Center">
-										<Image id="image-4" width="240px" height="160px" class="transparent transparentBorder"
+									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin">
+										<Image id="image-4" width="225px" height="190px" class="transparent transparentBorder"
 											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
-										<Title id="text-4" text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="240px"></Title>
+										<Title id="text-4" text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
 							</l:Grid>
-							<l:Grid>
+							<l:Grid class="sapUiMediumMarginTop" vSpacing="0">
 								<l:layoutData>
 									<l:GridData span="XL6 L6 M12 S12"></l:GridData>
 								</l:layoutData>
-								<f:Form class="sapUiLargeMarginBorrom sapUiMediumMarginTop">
+								<f:Form class="sapUiLargeMarginTop">
 									<f:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</f:layoutData>
@@ -111,6 +122,17 @@
 												</Text>
 											</f:fields>
 										</f:FormElement>
+									</f:FormContainer>
+								</f:Form>
+								<f:Form class="sapUiLargeMarginBottom">
+									<f:layoutData>
+										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
+									</f:layoutData>
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="4" labelSpanM="4" labelSpanS="5" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0"
+											emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:FormContainer>
 										<f:FormElement>
 											<f:label>
 												<Label text="{i18n>packagingMaterial}" class="sapUiTinyMarginTop sapUiTinyMarginBottom labelStyle"></Label>
@@ -125,7 +147,7 @@
 										</f:FormElement>
 									</f:FormContainer>
 								</f:Form>
-								<vk:Viewer id="viewer" enableSceneTree="false" height="500px" class="sapUiMediumMarginTop">
+								<vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
 									<vk:layoutData>
 										<l:GridData span="XL12 L12 M12 S12"></l:GridData>
 									</vk:layoutData>
