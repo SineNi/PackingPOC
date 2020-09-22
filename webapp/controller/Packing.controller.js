@@ -9,9 +9,10 @@
 		"sap/ui/vk/ContentResource",
 		"sap/ui/vk/ContentConnector",
 		"sap/ui/vk/thirdparty/three",
-		"sap/ui/core/ValueState"
+		"sap/ui/core/ValueState",
+		"sap/ui/vk/Camera"
 	], function (Controller, GlobalModel, Global, Service, Util, TableItemsHelper, JSONModel, ContentResource, ContentConnector, threejs,
-		ValueState) {
+		ValueState, Camera) {
 		"use strict";
 		return Controller.extend("scm.ewm.PackingPOC.controller.Packing", {
 			oItemHelper: new TableItemsHelper(new JSONModel([])),
@@ -238,7 +239,10 @@
 				Global.setMaxSequence(aItem.length);
 				this.oItemHelper.setItems(aItem);
 				this.highlightProductBySequence(1);
-				this.addProduct(1, 10, 10, 10, -8 + 0, -8, -8, 0xFFFFFF);
+				//same size
+				// this.addProduct(1, 10, 10, 10, -8, -8, -8, 0xFFFFFF);
+				//different size
+				this.addProduct(1, 25.8, 10, 9.8, 0, -8, -8, 0xFFFFFF);
 				Global.setBusy(false);
 				// }.bind(this))
 				// .then(function () {
@@ -251,6 +255,9 @@
 				// 	oInput.focus();
 				// 	Global.setBusy(false);
 				// });
+				for (var i = 1; i <= 4; i++) {
+					this.addImageByIndex(i);
+				}
 			},
 			generateRandomArray: function (aArray) {
 				var aNumber = aArray.slice();
@@ -271,6 +278,7 @@
 				for (var i = 0; i < aItem.length; i++) {
 					aItem[i].sequence = aRandomArray[i];
 					aItem[i].visible = true;
+					aItem[i].src = "./css/product" + aRandomArray[i] + ".jpg";
 				}
 				return aItem;
 			},
@@ -294,10 +302,6 @@
 				this.oItemHelper.setVisibleBySequence(iSequence, false);
 				var iIndex = this.oItemHelper.getItemIndexBySequence(iSequence) + 1;
 				this.removeImageByIndex(iIndex);
-				// var sImageId = "image-" + iIndex;
-				// var oImage = this.getView().byId(sImageId);
-				// sImageId = oImage.getId();
-				// $("#" + sImageId).removeClass("border").addClass("transparentBorder").addClass("transparentText");
 				this.removeTextByIndex(iIndex);
 			},
 			removeTextByIndex: function (iIndex) {
@@ -313,10 +317,12 @@
 				$("#" + sTextId).removeClass("transparent");
 			},
 			addImageByIndex: function (iIndex) {
-				var sImageId = "image-" + iIndex;
-				var oImage = this.getView().byId(sImageId);
-				sImageId = oImage.getId();
-				$("#" + sImageId).removeClass("transparent");
+				setTimeout(function () {
+					var sImageId = "image-" + iIndex;
+					var oImage = this.getView().byId(sImageId);
+					sImageId = oImage.getId();
+					$("#" + sImageId).removeClass("transparent");
+				}.bind(this), 0);
 			},
 			removeImageByIndex: function (iIndex) {
 				var sImageId = "image-" + iIndex;
@@ -324,6 +330,50 @@
 				sImageId = oImage.getId();
 				$("#" + sImageId).addClass("transparentBorder").removeClass("border").addClass("transparent");
 			},
+			//all product with same size
+			// onProductChange: function (oEvent) {
+			// 	var oInput = oEvent.getSource();
+			// 	oInput.setValue("");
+			// 	oInput.focus();
+			// 	var iSequence = Global.getCurrentSequence();
+			// 	switch (iSequence) {
+			// 	case 1:
+			// 		this.changeProductColorBySequence(iSequence);
+			// 		this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
+			// 		break;
+			// 	case 2:
+			// 		this.changeProductColorBySequence(iSequence);
+			// 		this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
+			// 		break;
+			// 	case 3:
+			// 		this.changeProductColorBySequence(iSequence);
+			// 		this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence - 2), -8, -8 + 11 * (iSequence - 2), 0xFFFFFF);
+			// 		break;
+			// 	case 4:
+			// 		this.changeProductColorBySequence(iSequence);
+			// 		break;
+			// 	default:
+			// 		break;
+			// 	}
+
+			// // if (iSequence < 2) {
+			// // 	this.changeProductColorBySequence(iSequence);
+			// // 	this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
+			// // } else {
+			// // 	this.changeProductColorBySequence(iSequence);
+			// // 	this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
+			// // }
+
+			// this.updateSourceAfterPacking();
+
+			// //highlight selected product
+			// for ( var i=0; i < iSequence; i++) {
+			// 	PositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor = this.readSpec(iSequence);
+			// 	initProduct(iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor);
+			// }
+			////indicate the position on 3d viewer
+			// },
+
 			onProductChange: function (oEvent) {
 				var oInput = oEvent.getSource();
 				oInput.setValue("");
@@ -332,15 +382,15 @@
 				switch (iSequence) {
 				case 1:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
+					this.addProduct(iSequence + 1, 10, 10, 15.8, -8, -8, 5, 0xFFFFFF);
 					break;
 				case 2:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
+					this.addProduct(iSequence + 1, 15, 10, 7, 4.6, -8, 0.5, 0xFFFFFF);
 					break;
 				case 3:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence - 2), -8, -8 + 11 * (iSequence - 2), 0xFFFFFF);
+					this.addProduct(iSequence + 1, 12, 10, 8.8, 3.1, -8, 8.5, 0xFFFFFF);
 					break;
 				case 4:
 					this.changeProductColorBySequence(iSequence);
@@ -348,23 +398,20 @@
 				default:
 					break;
 				}
-
-				// if (iSequence < 2) {
-				// 	this.changeProductColorBySequence(iSequence);
-				// 	this.addProduct(iSequence + 1, 10, 10, 10, -8 + 11 * (iSequence), -8, -8, 0xFFFFFF);
-				// } else {
-				// 	this.changeProductColorBySequence(iSequence);
-				// 	this.addProduct(iSequence + 1, 10, 10, 10, -8, -8, -8 + 11 * (iSequence - 1), 0xFFFFFF);
-				// }
-
 				this.updateSourceAfterPacking();
 
-				//highlight selected product
-				// for ( var i=0; i < iSequence; i++) {
-				// 	PositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor = this.readSpec(iSequence);
-				// 	initProduct(iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor);
-				// }
-				//indicate the position on 3d viewer
+				//	highlight selected product
+				for (var i = 0; i < iSequence; i++) {
+					PositionX,
+					iPositionY,
+					iPositionZ,
+					iLength,
+					iWidth,
+					iHeight,
+					iColor = this.readSpec(iSequence);
+					initProduct(iPositionX, iPositionY, iPositionZ, iLength, iWidth, iHeight, iColor);
+				}
+				// indicate the position on 3 d viewer
 			},
 			updateSourceAfterPacking: function () {
 				var iSequence = Global.getCurrentSequence();
@@ -382,12 +429,12 @@
 			},
 
 			createShippingHU: function (sMaterialId, ilength, iWidth, iHeight) {
-				var sHuId = "HU10001";
+				var sHuId = "HU1000" + parseInt(100 * Math.random());
 				// Service.createShippingHU(sHuId, sMaterialId)
 				// 	.then(function (oResult) {
 				// 		sHuId = oResult.HuId;
 				Global.setCurrentShipHandlingUnit(sHuId);
-				Global.setCurrentShipMaterial("Carton Large");
+				Global.setCurrentShipMaterial("Carton Small");
 				Global.setCurrentShipHandlingUnitClosed(false);
 				this.addHU(ilength, iWidth, iHeight);
 				// }.bind(this))
@@ -431,11 +478,12 @@
 				var camera = new THREE.PerspectiveCamera(40, 579 / 496, 1, 1000);
 				this.initPosition(camera, "camera", 0, 0, 0, "7");
 				this.root.add(camera);
-				
+
 				this.root.add(new THREE.AmbientLight(0x222222));
 				var light = new THREE.PointLight(0xffffff, 1);
 				camera.add(light);
 				this.root.rotateY(-38);
+				// this.root.rotateX(0.5);
 
 				var axes = new THREE.AxesHelper(35);
 				this.initPosition(axes, "axe", -13, -13, -13, "1");
@@ -562,6 +610,7 @@
 				Global.setCurrentSequence(1);
 				var oFront, oBack;
 				for (var i = 1; i <= 4; i++) {
+					this.removeImageByIndex(i);
 					this.addTextByIndex(i);
 					this.addImageByIndex(i);
 					oFront = this.root.getChildByName(i + "+");
@@ -580,6 +629,13 @@
 						name: "Object3D"
 					})
 				);
+			},
+			formatImageUrl: function (iSequence) {
+				if (Util.isEmpty(iSequence)) {
+					return "";
+				} else {
+					return "./css/product" + iSequence + ".jpg";
+				}
 			}
 		});
 	});

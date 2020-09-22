@@ -62,7 +62,7 @@
 									</l:layoutData>
 									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd">
 										<Image id="image-1" width="222px" height="190px" class="transparent transparentBorder"
-											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+											src="{itemModel>/0/src}"></Image>
 										<Title id="text-1" text="{itemModel>/0/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
@@ -72,7 +72,7 @@
 									</l:layoutData>
 									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin">
 										<Image id="image-2" width="225px" height="190px" class="transparent transparentBorder"
-											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+											src="{itemModel>/1/src}"></Image>
 										<Title id="text-2" text="{itemModel>/1/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
@@ -82,7 +82,7 @@
 									</l:layoutData>
 									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd">
 										<Image id="image-3" width="225px" height="190px" class="transparent transparentBorder"
-											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+											src="{itemModel>/2/src}"></Image>
 										<Title id="text-3" text="{itemModel>/2/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
@@ -92,7 +92,7 @@
 									</l:layoutData>
 									<VBox alignItems="Center" class="sapUiMediumMarginTop sapUiSmallMarginBegin">
 										<Image id="image-4" width="225px" height="190px" class="transparent transparentBorder"
-											src="https://pic4.zhimg.com/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.jpg?source=172ae18b"></Image>
+											src="{itemModel>/3/src}"></Image>
 										<Title id="text-4" text="{itemModel>/3/sequence}" titleStyle="H2" textAlign="Center" width="225px"></Title>
 									</VBox>
 								</l:Grid>
