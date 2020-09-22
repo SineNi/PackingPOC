@@ -366,9 +366,6 @@
 				// }
 				//indicate the position on 3d viewer
 			},
-			readSpec: function (iSequence) {
-
-			},
 			updateSourceAfterPacking: function () {
 				var iSequence = Global.getCurrentSequence();
 				this.removeProductBySequence(iSequence);
@@ -430,32 +427,17 @@
 			initThreejsModel: function () {
 				ContentConnector.addContentManagerResolver(this.threejsContentManagerResolver.bind(this));
 				this.initPosition(this.root, "Root", 0, 0, 0, "0");
-				var camera;
-				camera = new THREE.PerspectiveCamera(40, 579 / 496, 1, 1000);
-				camera.position.set(15, 20, 30);
+
+				var camera = new THREE.PerspectiveCamera(40, 579 / 496, 1, 1000);
+				this.initPosition(camera, "camera", 0, 0, 0, "7");
 				this.root.add(camera);
+				
 				this.root.add(new THREE.AmbientLight(0x222222));
-
-				// light
-
 				var light = new THREE.PointLight(0xffffff, 1);
 				camera.add(light);
-				// this.root.rotateY(45);
-				// var obj;
-				// obj = new THREE.Mesh(
-				// 	new THREE.BoxBufferGeometry(25, 25, 25),
-				// 	new THREE.MeshPhongMaterial({
-				// 		color: 0x0000C0,
-				// 		shading: THREE.FlatShading
-				// 	})
-				// );
-				// this.initPosition(obj, "Box", 0, 0, 0, "1");
-				// this.root.add(obj);
+				this.root.rotateY(-38);
+
 				var axes = new THREE.AxesHelper(35);
-				// axes.position.x = -5
-				// axes.position.y = -5
-				// axes.position.z = -5
-				// scene.add( axes );
 				this.initPosition(axes, "axe", -13, -13, -13, "1");
 				this.root.add(axes);
 
