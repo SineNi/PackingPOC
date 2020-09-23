@@ -600,7 +600,7 @@
 
 				var edges = new THREE.EdgesGeometry( meshGeometry );
 				var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xff0000} ) );
-				line.position.set(oPosition.x, oPosition.y, oPosition.z)
+				this.initPosition(line, iSequence + "e", oPosition.x, oPosition.y, oPosition.z, "4");
 				this.root.add( line );
 				
 				this.getView().byId("viewer").addContentResource(
@@ -613,15 +613,17 @@
 			},
 			clearObject: function () {
 				Global.setCurrentSequence(1);
-				var oFront, oBack;
+				var oFront, oBack, oEdge;
 				for (var i = 1; i <= 4; i++) {
 					this.removeImageByIndex(i);
 					this.addTextByIndex(i);
 					this.addImageByIndex(i);
 					oFront = this.root.getChildByName(i + "+");
 					oBack = this.root.getChildByName(i + "-");
+					oEdge = this.root.getChildByName(i + "e");
 					this.root.remove(oFront);
 					this.root.remove(oBack);
+					this.root.remove(oEdge);
 				}
 				oFront = this.root.getChildByName("BigBox+");
 				oBack = this.root.getChildByName("BigBox-");
