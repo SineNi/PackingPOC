@@ -274,7 +274,8 @@
 			},
 
 			addSequence: function (aItem) {
-				var aRandomArray = this.generateRandomArray([1, 2, 3, 4]);
+				// var aRandomArray = this.generateRandomArray([1, 2, 3, 4]);
+				var aRandomArray = [3,1,4,2];
 				for (var i = 0; i < aItem.length; i++) {
 					aItem[i].sequence = aRandomArray[i];
 					aItem[i].visible = true;
@@ -376,7 +377,18 @@
 
 			onProductChange: function (oEvent) {
 				var oInput = oEvent.getSource();
+				var sInput = Util.trim(oEvent.getParameter("newValue")).toUpperCase();
 				oInput.setValue("");
+				if (sInput === "CLOSE") {
+					this.closeHU();
+					Global.setCurrentShipMaterial("");
+					Global.setCurrentShipHandlingUnit("");
+					var oSourceInput = this.getView().byId("source-input");
+					oSourceInput.setValue("");
+					oSourceInput.focus();
+					
+					return;
+				}
 				oInput.focus();
 				var iSequence = Global.getCurrentSequence();
 				switch (iSequence) {
@@ -418,13 +430,9 @@
 				this.removeProductBySequence(iSequence);
 				// this.removeImageByIndex(iSequence);
 				// this.removeTextByIndex(iSequence);
-				if (iSequence < Global.getMaxSequence()) {
+				if (iSequence <= Global.getMaxSequence()) {
 					Global.setCurrentSequence(iSequence + 1);
 					this.highlightProductBySequence(iSequence + 1);
-				} else {
-					var oSourceInput = this.getView().byId("source-input");
-					oSourceInput.setValue("");
-					oSourceInput.focus();
 				}
 			},
 
@@ -517,7 +525,7 @@
 				mesh_.renderOrder = 1;
 				this.initPosition(mesh_, "BigBox-", 0, 0, 0, "3");
 				this.root.add(mesh_);
-				
+
 				// this.root.add(obj);
 				this.getView().byId("viewer").addContentResource(
 					new ContentResource({
@@ -598,11 +606,13 @@
 				this.initPosition(mesh_, iSequence + "-", oPosition.x, oPosition.y, oPosition.z, "3");
 				this.root.add(mesh_);
 
-				var edges = new THREE.EdgesGeometry( meshGeometry );
-				var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xff0000} ) );
+				var edges = new THREE.EdgesGeometry(meshGeometry);
+				var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+					color: 0xff0000
+				}));
 				this.initPosition(line, iSequence + "e", oPosition.x, oPosition.y, oPosition.z, "4");
-				this.root.add( line );
-				
+				this.root.add(line);
+
 				this.getView().byId("viewer").addContentResource(
 					new ContentResource({
 						source: this.root,
@@ -637,12 +647,27 @@
 					})
 				);
 			},
-			formatImageUrl: function (iSequence) {
-				if (Util.isEmpty(iSequence)) {
-					return "";
-				} else {
-					return "./css/product" + iSequence + ".jpg";
+			closeHU: function () {
+				var oFront, oBack, oEdge;
+				for (var i = 1; i <= 4; i++) {
+					oFront = this.root.getChildByName(i + "+");
+					oBack = this.root.getChildByName(i + "-");
+					oEdge = this.root.getChildByName(i + "e");
+					this.root.remove(oFront);
+					this.root.remove(oBack);
+					this.root.remove(oEdge);
 				}
+				oFront = this.root.getChildByName("BigBox+");
+				oBack = this.root.getChildByName("BigBox-");
+				this.root.remove(oFront);
+				this.root.remove(oBack);
+				this.getView().byId("viewer").addContentResource(
+					new ContentResource({
+						source: this.root,
+						sourceType: "THREE.Object3D",
+						name: "Object3D"
+					})
+				);
 			}
 		});
 	});
