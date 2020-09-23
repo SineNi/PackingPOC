@@ -43,7 +43,7 @@
 				// 		Global.setSourceType(mResponse.SourceType);
 				// 		Global.setSourceMaterialId(mResponse.PackMat);
 				// 		Global.setIsPickHUInSourceSide(mResponse.IsPickHU);
-				this.createShippingHU("CARTON_L", 25, 25, 25);
+				this.createShippingHU("CARTON_m", 30, 20, 22.5);
 				// 		// this.createShippingHU(sMaterialId, ilength, iWidth, iHeight);
 				// 	}.bind(this))
 				// 	.then(function () {
@@ -242,7 +242,7 @@
 				//same size
 				// this.addProduct(1, 10, 10, 10, -8, -8, -8, 0xFFFFFF);
 				//different size
-				this.addProduct(1, 25.8, 10, 9.8, 0, -8, -8, 0xFFFFFF);
+				this.addProduct(1, 22, 12, 8, -15+22/2, -10+12/2, -11.25+8/2, 0xFFFFFF);
 				Global.setBusy(false);
 				// }.bind(this))
 				// .then(function () {
@@ -380,17 +380,18 @@
 				oInput.focus();
 				var iSequence = Global.getCurrentSequence();
 				switch (iSequence) {
+					// this.addProduct(1, 22, 12, 8, -15+22/2, -10+12/2, -11.25+8/2, 0xFFFFFF);
 				case 1:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 10, 10, 15.8, -8, -8, 5, 0xFFFFFF);
+					this.addProduct(iSequence + 1, 16, 6, 14.4, -15+16/2, -10+6/2, 11.25-14.4/2, 0xFFFFFF);
 					break;
 				case 2:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 15, 10, 7, 4.6, -8, 0.5, 0xFFFFFF);
+					this.addProduct(iSequence + 1, 6.5, 10, 13.8, -15+16+0.1+6.5/2, -10+10/2, -11.25+8+0.1+13.8/2, 0xFFFFFF);
 					break;
 				case 3:
 					this.changeProductColorBySequence(iSequence);
-					this.addProduct(iSequence + 1, 12, 10, 8.8, 3.1, -8, 8.5, 0xFFFFFF);
+					this.addProduct(iSequence + 1, 7.3, 8, 15, -15+16+6.5+0.2+7.3/2, -10+8/2, -11.25+15/2, 0xFFFFFF);
 					break;
 				case 4:
 					this.changeProductColorBySequence(iSequence);
@@ -486,7 +487,7 @@
 				// this.root.rotateX(0.5);
 
 				var axes = new THREE.AxesHelper(35);
-				this.initPosition(axes, "axe", -13, -13, -13, "1");
+				this.initPosition(axes, "axe", -15, -10, -11.25, "1");
 				this.root.add(axes);
 
 				this.getView().byId("viewer").addContentResource(
@@ -504,7 +505,7 @@
 					transparent: true
 				});
 
-				var meshGeometry = new THREE.BoxBufferGeometry(26, 26, 26);
+				var meshGeometry = new THREE.BoxBufferGeometry(30, 20, 22.5);
 
 				var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
 				mesh.material.side = THREE.BackSide; // back faces
